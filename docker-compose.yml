@@ -1,0 +1,22 @@
+services:
+  user:
+    build: ./user
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./user/users:/app/users
+
+  file:
+    build: ./file
+    ports:
+      - "5051:5051"
+    volumes:
+      - ./file/libraries:/app/libraries
+
+  client:
+    build: ./client
+    depends_on:
+      - user
+      - file
+    volumes:
+      - ./client/data:/app/data
