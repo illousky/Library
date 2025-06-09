@@ -1,6 +1,6 @@
-AUTORES:
+AUTOR:
+	
 	- Ignacio González Porras
-	- Jorge Ibarreta Gallego
 	
 	
 GUIA DE EJECUCION:
