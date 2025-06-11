@@ -35,7 +35,8 @@ FILE HIERARCHY:
 			- requirements.txt
 			
 
-FICHEROS EXTRA:
+EXTRA FILES:
+
 	- nada.txt: Located at the path /P1/client/data. Created for convenience to allow uploading the /data directory to GitHub. It is an empty file
 	- Memoria-P1: Located in /P1. A more detailed explanation of the work done in the project and the contents of each file.
 	
