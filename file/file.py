@@ -11,12 +11,14 @@ class File:
 
     def __init__(self, name, content, uid):
         """
-            Constructor de la clase File
-
-            Parámetros:
-            - name: Nombre del fichero
-            - content: Contenido del fichero
-            - uid: Identificador único del usuario asociado al fichero
+            Constructor of the File class
+            
+            Params:
+            - name: Name of the file
+            - content: Content of the file
+            - uid: Unique identifier of the user associated with the file
+            
+            Initializes a new file with the given name and content, and associates it with the user identified by uid.
         """
 
         self.name = name
@@ -28,9 +30,9 @@ class File:
 
     def new_file(self):
         """
-            Crea un nuevo fichero con el contenido indicado
+            Creates a new file with the given content
             
-            return: JSON con el estado de la operación
+            return: JSON with the status of the operation
         """
 
         file_path = self.crea_directorio() + "/" + self.name
@@ -45,9 +47,9 @@ class File:
 
     def crea_directorio(self):
         """
-            Crea un directorio con el identificador del usuario asociado al fichero
+            Creates a directory for the user if it does not exist
             
-            return: Ruta del directorio creado o existente
+            return: Path to the directory where the file will be stored
         """
 
         directorio = "libraries/" + str(self.uid_asociado)
@@ -61,13 +63,13 @@ class File:
     @staticmethod
     def verify_token(uid, token):
         """
-            Verifica si el token de autenticación es correcto
+            Verifies if the token is correct for the given user ID
 
-            Parámetros:
-            - uid: Identificador único del usuario
-            - token: Token de autenticación
+            Params:
+            - uid: Unique identifier of the user
+            - token: Token to verify
 
-            return: True si el token es correcto, False en caso contrario
+            return: True if the token is valid, False otherwise
         """
 
         return token == str(uuid.uuid5(uuid.UUID("550e8400-e29b-41d4-a716-446655440000"), str(uid)))
@@ -76,12 +78,12 @@ class File:
     @staticmethod
     def listar_ficheros(uid):
         """
-            Lista los ficheros de un usuario
+            Lists the files of a user
 
-            Parámetros:
-            - uid: Identificador único del usuario
-
-            return: Lista de ficheros del usuario si existen, None en caso contrario
+            Params:
+            - uid: Unique identifier of the user
+            
+            return: List of files if found, None if the directory does not exist or is empty
         """
 
         directorio = "libraries/" + str(uid)
@@ -100,14 +102,14 @@ class File:
     @staticmethod
     def get_file_content(uid, filename, uid_propio):
         """
-            Obtiene el contenido de un fichero
+            Obtains the content of a file
 
-            Parámetros:
-            - uid: Identificador único del usuario asociado al fichero
-            - filename: Nombre del fichero
-            - uid_propio: Identificador único del usuario que solicita el fichero
+            Params:
+            - uid: Unique identifier of the user associated with the file
+            - filename: Name of the file to retrieve
+            - uid_propio: Unique identifier of the user requesting the file
 
-            return: Contenido del fichero si se ha encontrado, None en caso contrario
+            return: Content of the file if found, None if the file does not exist or is not accessible
         """
 
         directorio = "libraries/" + str(uid)
@@ -129,13 +131,13 @@ class File:
     @staticmethod
     def delete_file(uid, filename):
         """
-            Elimina un fichero
+            Deletes a file
 
-            Parámetros:
-            - uid: Identificador único del usuario asociado al fichero
-            - filename: Nombre del fichero a eliminar
+            Params:
+            - uid: Unique identifier of the user associated with the file
+            - filename: Name of the file to delete
 
-            return: JSON con el estado de la operación
+            return: JSON with the status of the operation
         """
 
         directorio = "libraries/" + str(uid)
@@ -151,14 +153,14 @@ class File:
     @staticmethod
     def annadir_contenido(uid, filename, content):
         """
-            Añade contenido a un fichero
+            Adds content to an existing file
 
-            Parámetros:
-            - uid: Identificador único del usuario asociado al fichero
-            - filename: Nombre del fichero
-            - content: Contenido a añadir
+            Params:
+            - uid: Unique identifier of the user associated with the file
+            - filename: Name of the file to which content will be added
+            - content: Content to add to the file
 
-            return: JSON con el estado de la operación
+            return: JSON with the status of the operation and the content added, JSON with status ERROR if the file does not exist
         """
 
         directorio = "libraries/" + str(uid)
@@ -175,9 +177,9 @@ class File:
     @app.route("/create_file", methods= ["POST"])
     async def create_file():
         """
-            Método de quart para crear un fichero
+            Quart method to create a new file
 
-            return: JSON con el estado de la operación y el nombre del fichero creado
+            return: JSON with the status of the operation and the filename, JSON with status ERROR if the file could not be created
         """
 
         auth = request.headers.get("Authorization")
@@ -200,9 +202,9 @@ class File:
     @app.route("/listar_documentos", methods= ["GET"])
     async def listar_documentos():
         """
-            Método de quart para listar los ficheros de un usuario
+            Quart method to list the files of a user
 
-            return: JSON con el estado de la operación y la lista de ficheros del usuario, JSON con status ERROR si no hay ficheros
+            return: JSON with the status of the operation and the list of files, JSON with status ERROR if the user does not have any files or if the token is invalid
         """
 
         auth = request.headers.get("Authorization")
@@ -227,12 +229,12 @@ class File:
     @app.route("/get_file/<filename>", methods= ["GET"])
     async def get_file(filename):
         """
-            Método de quart para obtener el contenido de un fichero
+            Quart method to get the content of a file
 
-            Parámetros:
-            - filename: Nombre del fichero
-
-            return: JSON con el estado de la operación y el contenido del fichero, JSON con status ERROR si no se ha encontrado el fichero
+            Params:
+            - filename: Name of the file to retrieve
+            
+            return: JSON with the status of the operation and the content of the file, JSON with status ERROR if the file is not found or if the token is invalid
         """
 
         auth = request.headers.get("Authorization")
@@ -256,12 +258,12 @@ class File:
     @app.route("/delete_file/<filename>", methods= ["DELETE"])
     async def delete_file_quart(filename):
         """
-            Método de quart para eliminar un fichero
+            Quart method to delete a file
 
-            Parámetros:
-            - filename: Nombre del fichero
+            Params:
+            - filename: Name of the file to delete
 
-            return: JSON con el estado de la operación
+            return: JSON with the status of the operation
         """
 
         auth = request.headers.get("Authorization")
@@ -281,13 +283,13 @@ class File:
     @app.route("/get_file/<filename>/<uid>", methods= ["GET"])
     async def get_file_uid(filename, uid):
         """
-            Método de quart para obtener el fichero de otro usuario y añadirlo a la biblioteca del usuario que lo solicita
+            Quart method to get the content of a file associated with a specific user and add it to the user's library
 
-            Parámetros:
-            - filename: Nombre del fichero
-            - uid: Identificador único del usuario asociado al fichero
+            Params:
+            - filename: Name of the file to retrieve
+            - uid: Unique identifier of the user requesting the file
 
-            return: JSON con el estado de la operación y el contenido del fichero, JSON con status ERROR si no se ha encontrado el fichero
+            return: JSON with the status of the operation and the content of the file, JSON with status ERROR if the file is not found
         """
 
         auth = request.headers.get("Authorization")
@@ -311,12 +313,12 @@ class File:
     @app.route("/add_content/<filename>", methods= ["POST"])
     async def add_content(filename):
         """
-            Método de quart para añadir contenido a un fichero
+            Quart method to add content to an existing file
 
-            Parámetros:
-            - filename: Nombre del fichero
+            Params:
+            - filename: Name of the file to which content will be added
 
-            return: JSON con el estado de la operación
+            return: JSON with the status of the operation and the content added, JSON with status ERROR if the file does not exist or if the token is invalid
         """
 
         auth = request.headers.get("Authorization")

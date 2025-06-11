@@ -13,13 +13,13 @@ class User:
 
     def __init__(self, name, password, uid=None, token=None):
         """
-            Constructor de la clase User
+            Constructor of the User class
 
-            Parámetros:
-            - name: Nombre del usuario
-            - password: Contraseña del usuario
-            - uid: Identificador único del usuario
-            - token: Token de autenticación del usuario
+            Params:
+            - name: User name
+            - password: User password
+            - uid: Unique identifier for the user (optional, will be generated if not provided)
+            - token: Authentication token for the user (optional, will be generated if not provided)
         """
 
         self.name = name
@@ -32,9 +32,9 @@ class User:
 
     def generar_token(self):
         """
-            Genera un token de autenticación para el usuario
+            Generates a unique authentication token for the user based on their UID
 
-            return: Token de autenticación
+            return: generated unique token
         """
 
         secret_uid = uuid.UUID("550e8400-e29b-41d4-a716-446655440000")
@@ -43,9 +43,9 @@ class User:
 
     def crear_usuario(self):
         """
-            Crea un archivo de texto con los datos del usuario
+            Creates a user file with the user's data
 
-            return: None si el usuario ya existe, self si se ha creado correctamente
+            return: User object if the user was created successfully, None if the user already exists
         """
 
         file_path = "users/usuario_" + str(self.uid) + ".txt"
@@ -67,13 +67,13 @@ class User:
     @staticmethod
     def iniciar_sesion(name, password):
         """
-            Inicia sesión de un usuario
+            Static method to log in
 
-            Parámetros:
-            - name: Nombre del usuario
-            - password: Contraseña del usuario
+            Params:
+            - name: User name
+            - password: User password
 
-            return: Usuario si se ha iniciado sesión correctamente, None si no
+            return: User object if the user exists and the password is correct, None if could not log in
         """
 
         usuarios_dir = "users/"
@@ -99,15 +99,15 @@ class User:
         return User(name, password)
     
     
-    @app.route("/user/<user>", methods=["POST"]) # Esta función sirve para crear un usuario e iniciar sesión
+    @app.route("/user/<user>", methods=["POST"])
     async def user(user):
         """
-            Método de quart para crear un usuario e iniciar sesión
+            Quart method to create a user
 
             Parámetros:
-            - user: Nombre del usuario
+            - user: User name
 
-            return: JSON con el UID y token del usuario si se ha creado correctamente, JSON con status ERROR si no
+            return: JSON with the UID and token of the user if created successfully, JSON with status ERROR if not
         """
 
         password = request.args.get("password")
@@ -119,15 +119,15 @@ class User:
             return jsonify({"status": "ERROR"})
     
     
-    @app.route("/get_user_uid/<user>", methods=["GET"]) # Esta función sirve para obtener el UID de un usuario
+    @app.route("/get_user_uid/<user>", methods=["GET"])
     async def get_user_uid(user):
         """
-            Método de quart para obtener el UID de un usuario
+            Quart method to get the UID of a user
 
             Parámetros:
-            - user: Nombre del usuario
+            - user: User name
 
-            return: JSON con el UID del usuario si existe, JSON con status ERROR si no
+            return: JSON with the UID of the user if exists, JSON with status ERROR if not
         """
 
         password = request.args.get("password")
