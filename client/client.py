@@ -15,10 +15,10 @@ uid_ignacio = ""
 class Test:
 
 
-    def test_create_init_user(): # Test de la creación de un usuario
+    def test_create_init_user(): # User creation test
 
-        print("Creando usuario antonio con password 1234...")
-        print("Debe devolver un json con el uid y el token del usuario")
+        print("Creating user with password 1234...")
+        print("Should return a json with the uid and token of the user")
 
         url = url_user + "user/antonio"
 
@@ -35,13 +35,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_get_user_uid(): # Test de la obtención del UID de un usuario
+    def test_get_user_uid(): # Obtain user UID test
 
-        print("\nObteniendo UID de usuario antonio con password 1234...")
-        print("Debe devolver su UID")
+        print("\nObtaining UID of user with password 1234...")
+        print("Should return his UID")
 
         global token_antonio
         global uid_antonio
@@ -64,13 +64,13 @@ class Test:
             uid_antonio = response.json()["uid"]
             token_antonio = str(uuid.uuid5(uuid.UUID("550e8400-e29b-41d4-a716-446655440000"), str(uid_antonio)))
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
     
-    def test_user_error(): # Test de error en iniciar sesión de un usuario
+    def test_user_error(): # Error login test
             
-            print("\nIntentando iniciar sesión con una contraseña incorrecta...")
-            print("Debe devolver ERROR")
+            print("\nTrying to log in with a wrong password...")
+            print("Should return ERROR")
 
             url = url_user + "user/antonio"
 
@@ -87,13 +87,13 @@ class Test:
             if response.status_code == 200:
                 print(response.json())
             else:
-                print("Error con el código de respuesta " + str(response.status_code))
+                print("Error with response code " + str(response.status_code))
 
 
-    def test_get_user_uid_error(): # Test de error en obtener el UID de un usuario
+    def test_get_user_uid_error(): # Error obtaining user UID test
 
-        print("\nIntentando obtener el UID de un usuario con una contraseña incorrecta...")
-        print("Debe devolver ERROR")
+        print("\nTrying to obtain UID of user with wrong password...")
+        print("Should return ERROR")
 
         url = url_user + "get_user_uid/antonio"
 
@@ -110,13 +110,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_create_file(): # Test de la creación de un fichero
+    def test_create_file(): # Test of file creation
 
-        print("Creando el fichero fichero_001.txt con el contenido 'texto de prueba del fichero'")
-        print("Debe devolver OK y el nombre del fichero")
+        print("\nCreating file fichero_001.txt with content 'texto de prueba del fichero'")
+        print("Should return OK and the name of the file")
 
         url = url_file + "create_file"
 
@@ -136,13 +136,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
     
-    def test_create_second_file(): # Test de la creación de un segundo fichero
+    def test_create_second_file(): # Test of creating a second file
 
-        print("\nCreando el fichero fichero_002.txt con el contenido 'Segundo fichero de prueba'")
-        print("Debe devolver OK y el nombre del fichero")
+        print("\nCreating file fichero_002.txt with content 'Segundo fichero de prueba'")
+        print("Should return OK and the name of the file")
 
         url = url_file + "create_file"
 
@@ -162,13 +162,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta  " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_crear_fichero_token_error(): # Test de error en la creación de un fichero
+    def test_crear_fichero_token_error(): # Test of creating a file with an incorrect token
             
-            print("\nIntentando crear un fichero con un token incorrecto...")
-            print("Debe devolver ERROR")
+            print("\nTrying to create a file with an incorrect token...")
+            print("Should return ERROR")
     
             url = url_file + "create_file"
     
@@ -188,13 +188,13 @@ class Test:
             if response.status_code == 200:
                 print(response.json())
             else:
-                print("Error con el código de respuesta  " + str(response.status_code))
+                print("Error with response code " + str(response.status_code))
 
         
-    def test_listar_documentos(): # Test de listar los ficheros de un usuario
+    def test_listar_documentos(): # Test of listing the files of a user
 
-        print("\nBuscando la biblioteca de Antonio desde la cuenta de Antonio:")
-        print("Debe devolver OK y una lista con los ficheros de Antonio")
+        print("\nListing files of user Antonio:")
+        print("Should return OK and a list of files")
 
         url = url_file + "listar_documentos"
 
@@ -212,13 +212,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_listar_documentos_error(): # Test de error en listar los ficheros de un usuario que no tiene ficheros
+    def test_listar_documentos_error(): # Test of listing files with an empty library
             
-            print("\nCreando usuario nuevo con biblioteca vacía para que no haya ficheros en la biblioteca...")
-            print("Debe devolver ERROR")
+            print("\nCreating a new user with an empty library:")
+            print("Should return ERROR")
 
             url = url_user + "user/biblio_vacia"
 
@@ -251,13 +251,13 @@ class Test:
             if response.status_code == 200:
                 print(response.json())
             else:
-                print("Error con el código de respuesta " + str(response.status_code))
+                print("Error with response code " + str(response.status_code))
 
 
-    def test_create_second_user(): # Test de la creación de un segundo usuario
+    def test_create_second_user(): # Test of creating a second user
 
-        print("\nCreando usuario ignacio con password 4321...")
-        print("Debe devolver un json con el uid y el token del usuario")
+        print("\nCreating user Ignacio with password 4321:")
+        print("Should return a json with the uid and token of the user")
 
         global token_ignacio
         global uid_ignacio
@@ -280,13 +280,13 @@ class Test:
             uid_ignacio = response.json()["uid"]
             token_ignacio = response.json()["token"]
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_download_file(): # Test de descargar el contenido de un fichero perteneciente al propio usuario
+    def test_download_file(): # Test of downloading a file from the user's library
             
-            print("\nDescargando el fichero fichero_001.txt desde la cuenta de Antonio:")
-            print("Debe devolver OK y el contenido del fichero")
+            print("\nDownloading file fichero_001.txt from Antonio's account:")
+            print("Should return OK and the content of the file")
     
             url = url_file + "get_file/fichero_001.txt"
     
@@ -304,13 +304,13 @@ class Test:
             if response.status_code == 200:
                 print(response.json())
             else:
-                print("Error con el código de respuesta " + str(response.status_code))
+                print("Error with response code " + str(response.status_code))
 
 
-    def test_download_file_from_other_user(): # Test de descargar el contenido de un fichero perteneciente a otro usuario y guardarlo en la biblioteca del segundo usuario
+    def test_download_file_from_other_user(): # Test of downloading a file from a user and saving it in the library of another user
 
-        print("\nDescargando el fichero fichero_001.txt desde la cuenta de Ignacio:")
-        print("Debe devolver OK y el contenido del fichero y guardar el fichero en su biblioteca")
+        print("\nDownloading file fichero_001.txt from Ignacio's account:")
+        print("Should return OK and the content of the file, and save the file in his library")
 
         url = url_file + "get_file/fichero_001.txt/" + str(uid_antonio)
 
@@ -327,13 +327,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_add_content_to_file(): # Test de añadir contenido a un fichero
+    def test_add_content_to_file(): # Test of adding content to a file
 
-        print("\nAñadiendo contenido al fichero fichero_001.txt desde la cuenta de Ignacio:")
-        print("Debe devolver OK y el contenido añadido")
+        print("\nAdding content to file fichero_001.txt from Ignacio's account:")
+        print("Should return OK and the new content added to the file")
 
         url = url_file + "add_content/fichero_001.txt"
 
@@ -352,13 +352,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
 
     
-    def test_add_content_error(): # Test de error al añadir contenido a un fichero que no existe
+    def test_add_content_error(): # Test of adding content to a file that does not exist
                 
-        print("\nIntentando añadir contenido a un fichero que no existe...")
-        print("Debe devolver ERROR")
+        print("\nTrying to add content to a file that does not exist...")
+        print("Should return ERROR")
         
         url = url_file + "add_content/fichero_003.txt"
         
@@ -377,13 +377,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print("Error con el código de respuesta " + str(response.status_code))
+            print("Error with response code " + str(response.status_code))
             
             
-    def test_delete_file(): # Test de borrar un fichero
+    def test_delete_file(): # Test of deleting a file from the user's library
 
-        print("\nBorrando el fichero fichero_001.txt desde la cuenta de Antonio:")
-        print("Debe devolver OK")
+        print("\nDeleting file fichero_001.txt from Antonio's account:")
+        print("Should return OK")
 
         url = url_file + "delete_file/fichero_001.txt"
 
@@ -401,13 +401,13 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print(response.status_code)
+            print("Error with response code " + str(response.status_code))
 
 
-    def test_delete_file_error(): # Test de error al borrar un fichero que no existe
+    def test_delete_file_error(): # Test of deleting a file that does not exist
                 
-        print("\nIntentando borrar un fichero que no existe...")
-        print("Debe devolver ERROR")
+        print("\nTrying to delete a file that does not exist...")
+        print("Should return ERROR")
         
         url = url_file + "delete_file/fichero_003.txt"
         
@@ -425,23 +425,24 @@ class Test:
         if response.status_code == 200:
             print(response.json())
         else:
-            print(response.status_code)
+            print("Error with response code " + str(response.status_code))
             
 
 if __name__ == "__main__":
 
-    time.sleep(2) # Esperamos a que los servicios estén listos a la hora de ejecutar docker compose up
+    time.sleep(2) # Wait for the services to start
+    os.system("clear") # Clear the terminal
 
-    print("\n\n >>> EMPIEZA EL TEST DE user.py <<<\n\n")
+    print("\n\n >>> STARTING TEST OF user.py <<<\n\n")
 
     Test.test_create_init_user()
     Test.test_get_user_uid()
     Test.test_user_error()
     Test.test_get_user_uid_error()
 
-    print("\n\n >>> TERMINA EL TEST DE user.py <<<\n\n")
+    print("\n\n >>> ENDING TEST OF user.py <<<\n\n")
 
-    print("\n\n >>> EMPIEZA EL TEST DE file.py <<<\n\n")
+    print("\n\n >>> STARTING TEST OF file.py <<<\n\n")
 
     Test.test_create_file()
     Test.test_create_second_file()
@@ -456,4 +457,4 @@ if __name__ == "__main__":
     Test.test_delete_file()
     Test.test_delete_file_error()
 
-    print("\n\n >>> TERMINA EL TEST DE file.py <<<\n\n")
+    print("\n\n >>> ENDING TEST OF file.py <<<\n\n")

@@ -1,15 +1,15 @@
-AUTOR:
+AUTHOR:
 	
-	- Ignacio González Porras
+	- Ignacio Gonzalez Porras
 	
 	
-GUIA DE EJECUCION:
+EXECUTION GUIDE:
 
-	- Para ejecutar el sistema, abrir una terminal en modo rootless en el directorio principal de la práctica
-	  y ejecutar los comandos "docker compose build" y "docker compose up"
+	- To run the system, open a terminal in rootless mode in the main directory of the project
+	  and execute the commands "docker compose build" and "docker compose up"
 	  
 	  
-JERARQUÍA DE FICHEROS:
+FILE HIERARCHY:
 
 	- /P1
 		- docker-compose.yml
@@ -22,22 +22,22 @@ JERARQUÍA DE FICHEROS:
 		
 		- /file
 			- /libraries
-				- Aqui se almacenarán directorios con los ficheros guardados en las bibliotecas de cada usuario
+				- Here, directories will be stored with the files saved in each user's libraries
 			- file.py
 			- Dockerfile
 			- requirements.txt
 		
 		- /user
 			- /users
-				- Aqui se almacenarán ficheros de texto con la información de cada usuario
+				- Here, text files with each user's information will be stored
 			- user.py
 			- Dockerfile
 			- requirements.txt
 			
 
 FICHEROS EXTRA:
-	- nada.txt: Ubicado en el path /P1/client/data. Creado por comodidad para poder subir el directorio /data a github. Es un fichero vacío
-	- Memoria-P1: Ubicado en /P1. Explicación más detallada de lo realizado en la práctica y de los contenidos de cada fichero.
+	- nada.txt: Located at the path /P1/client/data. Created for convenience to allow uploading the /data directory to GitHub. It is an empty file
+	- Memoria-P1: Located in /P1. A more detailed explanation of the work done in the project and the contents of each file.
 	
 			
 	
